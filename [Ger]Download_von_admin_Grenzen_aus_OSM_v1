@@ -1,13 +1,14 @@
-Download von administrativen Grenzen und Polygonen aus OpenStreetMap
+# Download von administrativen Grenzen und Polygonen aus OpenStreetMap
 
 Alex Eugster, 26.1.2016
-Einleitung
+
+## Einleitung
 Diese Dokumentation zeigt die vier grundsätzlichen Wege auf, wie man beliebige Polygone/ administrative Grenzen aus OpenStreetMap (OSM) herausbekommt. Damit die Methoden relativ einheitlich sind, versuchen wir die Gemeindegrenzen aus OSM herauszulesen.
 
 [Notizen SK: 1. Sprache anpassen, dass es „seriöser“ wirkt. 2. Kapitel umordnen: Direkte Downloads zuerst, dann Webseiten, dann mit Tools die zuerst zu installieren sind… 3. Ergänzen: es fehlen noch Mapzen's countries… siehe: https://giswiki.hsr.ch/HowTo_OpenStreetMap#Administrative_Grenzen_aus_OSM_aufbereiten_.28getting_administrative_boundaries_from_OSM.29 ]
 
 
-Overpass Befehl
+## Overpass Befehl
 
 Overpass-turbo.osm.ch ist eine Webseite die es uns erlaubt über eine Querry Abfrage direkt Daten herunterzuladen.
 Damit auch Nicht-Informatiker solche Abfragen ausführen können, bietet die Webseite einen Wizard an, auf welchem man nach einem sogenannten „Tagnode“ suchen kann.
@@ -25,7 +26,7 @@ Unser Query auf Overpass sieht dann folgendermassen aus:
 Die von uns gefilterten Daten lassen sich dann direkt von der Webseite über Export in einem gewünschten Format herunterladen.
 (Aufgepasst, bei zu grossen Datenmengen kann der Browser nicht nachkommen und stirbt ab. )
 
-WambacherOSM Boundaries
+## WambacherOSM Boundaries
 
 Die Webseite osm.wno-edv-service.de/boundaries/ ist für das Herunterladen von Gebietspolygonen sehr gut geeignet. Nach einem einloggen mit dem eigenen OSM Account, kann man das interessante Gebiet auswählen und  exportieren. Von einem Land lassen sich über einen Rechtsklick die sogenannten „children“ selektieren. Die „children“ einfach eine genauere Aufteilung des Landes- oder „parentpolygons“.
 Es lassen sich auch ganze Subtrees (Das sind alle children von allen children) herunterladen.
@@ -67,20 +68,20 @@ Zu beachten ist, dass wir am Ende der Abfrage noch eine Umwandlung von Daten vor
 Wenn man Hilfe zu den OGR2OGR Querrys braucht, so kann man sich gut auf der Seite http://giswiki.hsr.ch/HowTo_OGR2OGR Hilfe suchen. Viele Query Probleme sind da bereits gelöst und gut umschrieben.
 
 
-Fazit
-Overpass
+## Fazit
+### Overpass
 Overpass konnte leider nicht alle Daten extrahieren, da Chrome zu schwach ist, um die ganze Datenmenge zu verarbeiten, schon die halbe Schweiz hat die Webseite überlastet.
 Sie erlaubt es uns jedoch unsere Query-Resultate zu inspizieren. Grundsätzlich macht die Webseite eine gute Arbeit, jedoch ist sie relativ grosszügig, wenn es darum geht Gebiete in der Schweiz auszuwählen. So kommt es, dass auch einige Gemeinden an den Grenzen zur Schweiz, im Lichtenstein und im Tirol miterfasst werden.
 Overpass kann wie EOSMDBOne ziemlich viel, ist aber nicht sehr leistungsfähig und die Daten sind nicht so genau wie die anderen Optionen.
 
-WambacherOSM Boundaries
+### WambacherOSM Boundaries
 Wambacher erzeugt uns für jede Gemeinde, für jeden Kanton und für die ganze Schweiz selbst ein Geojson File. Gemeinden sind vollzählig und decken alle Gebiete innerhalb der Schweiz ab. Es werden auch keine Gebiete, welche nicht in der Schweiz liegen markiert. Der einzige Mangel ist, dass die Filenamen für gewisse Gemeinden missraten sind. Anzumerken ist, dass ein einzelnes File, welches alle Gemeinden erfasst hätte einfacher zu verarbeiten gewesen wäre.
 Für das Erfassen von Grenzpolygonen ist diese Webseite sehr gut geeignet. Sie ist einfach zu benutzen und liefert perfekte Daten. Für ein Projekt wie das Erfassen von Gemeindegrenzen wäre diese Webseite meine Empfehlung.
 
-Polygons.openstreetmap.fr
+### Polygons.openstreetmap.fr
 Diese Seite ist für unser Problem leider etwas ungeeignet. Das Problem ist, dass die Webseite uns nur erlaubt einzelne Polygone zu exportieren. Dies ist bei 2.6 Tausend Gemeinden ziemlich mühsam. Die Geometrien sind aber relativ präzise. Um aber die Daten ungefähr prüfen zu können, habe ich mal das Polygon der ganzen Schweiz angeschaut. Die Grenzen sind gut abgeschnitten und es werden weder Teile von Lichtenstein, noch von anderen Nachbarsländer miteinbezogen. Jedoch werden Enklaven zum Polygon dazugezählt. (Ich kann mir vorstellen, dass sich das Problem auf Gemeindeebene aber nicht stellen würde.)
 Wenn man die Webseite einmal begriffen hat, ist sie sehr einfach zu bedienen, und sie gibt für kleinere Datenmengen sehr schnell Präzise Daten ab.
 
-EOSMDBOne
+### EOSMDBOne
 EOSMDBOne erfasst Gemeinden innerhalb der Schweiz auch etwas zu grosszügig. So kommt es, dass Gemeinden an der Grenze ebenfalls als Schweizer Gemeinden erfasst werden. Auch werden Enklaven als Schweizer Gemeinden erfasst.
 EOSMDBOne ist von den vier Möglichkeiten die komplizierteste, kann dafür aber neben dem erfassen von Polygonen auch noch einiges mehr.
